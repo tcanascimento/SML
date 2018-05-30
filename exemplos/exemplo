@@ -1,0 +1,36 @@
+fun ispositivo n = n >=0;
+
+fun area b h = b * h;
+
+fun area (b,h) = b * h;
+val r1 = (12, 50);
+area r1;
+
+val ns1 = [1, 2, ~3, ~4, 5];
+val ns2 = [];
+val ns3 = [~1];
+ 
+fun media ns = 
+	let
+	val fs = (List.filter (fn n => n >= 0) ns)
+	in 
+	(Real.fromInt (List.foldr (fn (a, b) => a + b) 0 fs ))
+	/ 
+	(Real.fromInt (List.length fs));
+	end;
+media [];
+
+fun prefix [] ys = true
+| prefix xs [] = false
+| prefix (x::xs) (y::ys) = if x <> y
+	then false
+	else (prefix xs ys);
+(*
+prefix [3,2,3] [1,2,4,1,2,3];
+prefix [1,2,3][1,2,3,4,6,1,6,1,0,12];
+prefix[][];
+prefix [][1,2,3];
+prefix [1,2,2][];
+*)
+
+

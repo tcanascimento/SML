@@ -1,0 +1,35 @@
+val entrada : string = "ATGACAGGA"
+explode entrada;
+(* [#"A", #"T", #"G", #"A", #"C", #"A", #"G", #"G", #"A"] *)
+
+fun agrupar [] = []
+	| agrupar [a] = []
+	| agrupar [a,b] = []
+	| agrupar (a::b::c::xs) = (a,b,c)::(agrupar xs);
+
+val exemplo = [(#"A", #"T", #"G")];
+fun str (a,b,c) = implode [a,b,c];
+List.map str exemplo;
+
+val entrada = ["ATG","ACA","GGA"];
+fun dec "ATG" = "Met" 
+	| dec "ACA" = "T"
+	| dec "GGA" =  "G"
+	| dec "CTG" = "L"
+	| dec seq = seq;
+List.map dec entrada;
+
+val saida = ["Met","T","G"];
+fun pad s = s ^ " ";
+List.map pad saida; 
+
+val padded = ["Met ", "T ", "G "];
+List.foldr op^ "" padded;
+
+fun proc texto = List.map dec (List.map str(agrupar (explode texto)));
+fun proc2 texto = List.foldr (fn (ac, elem) => ac ^ " " ^ elem) "" 
+	(List.map dec
+	(List.map str
+	(agrupar
+	(explode texto)
+	)));
